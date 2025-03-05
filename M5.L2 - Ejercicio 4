@@ -1,0 +1,93 @@
+# [M5.L2] - Actividad Nº 4: "Los argumentos de la funcion (teoría)"
+
+import random
+import time
+
+# Ejemplo args posicionales:
+def relator(primer_valor, segundo_valor, tercer_valor):
+    print("¡Hola! soy el Relator, tal vez me recuerden de películas como...")
+    print("... en fin, lo que importa es que los valores que recibí fueron: ")
+    time.sleep(1)
+    print("PRIMER VALOR: ", primer_valor)
+    time.sleep(1)
+    print("SEGUNDO VALOR: ", segundo_valor)
+    time.sleep(1)
+    print("TERCER VALOR: ", tercer_valor)
+
+################################
+
+def ordenar_valores(valor_1, valor_2, valor_3):
+    # Ordenaremos los valores de menor a mayor
+    mayor = 0
+    menor = 0
+    medio = 0
+
+    # Buscamos el MENOR valor
+    menor = valor_1
+    if (valor_2 < menor):
+        menor = valor_2
+        
+    if (valor_3 < menor):
+        menor = valor_3
+
+    #########################
+    # Buscamos el MAYOR valor
+    mayor = valor_1
+    if (valor_2 > mayor):
+        mayor = valor_2
+        
+    if (valor_3 > mayor):
+        mayor = valor_3
+
+    ########################
+    # Buscamos el valor INTERMEDIO
+
+    # Caso Nº 1: Todos son iguales
+    if ((valor_1 == valor_2) and (valor_2 == valor_3) and (valor_1 == valor_3)):
+        medio = valor_1 # Tomamos cualquiera, ya que son iguales
+        
+        relator(medio, medio, medio)
+
+    # Caso Nº 2: Todos son distintos
+    elif ((valor_1 != valor_2) and (valor_2 != valor_3) and (valor_1 != valor_3)):
+        # Si TODOS son distintos, un valor quedará en medio
+        if ((valor_1 > menor) and (valor_1 < mayor)):
+            medio = valor_1
+        elif ((valor_2 > menor) and (valor_2 < mayor)):
+            medio = valor_2
+        else:
+            medio = valor_3
+            
+        relator(menor, medio, mayor)
+
+    # Caso Nº 3: Un valor se repite
+    # Caso 3.A) Se repite el menor
+    elif (((menor == valor_1) and (menor == valor_2)) or
+            ((menor == valor_2) and (menor == valor_3)) or
+            ((menor == valor_1) and (menor == valor_3))):
+        
+        relator(menor, menor, mayor)
+
+    # Caso 3.B) Se repite el mayor
+    elif (((mayor == valor_1) and (mayor == valor_2)) or
+            ((mayor == valor_2) and (mayor == valor_3)) or
+            ((mayor == valor_1) and (mayor == valor_3))):
+
+        relator(menor, mayor, mayor)
+    
+################################
+# El programa comienza aquí: 
+
+valor_1 = random.randint(0, 10)
+valor_2 = random.randint(0, 10)
+valor_3 = random.randint(0, 10)
+
+print("Primera llamada (valores desordenados): ", valor_1, valor_2, valor_3, "\n\n")
+relator(valor_1, valor_2, valor_3)
+
+print("\n\nPrimera llamada (valores de menor a mayor): ", valor_1, valor_2, valor_3, "\n\n")
+ordenar_valores(valor_1, valor_2, valor_3)
+
+print("\n\n -------------------------------")
+print("Llamada con valores definidos: ")
+relator(primer_valor="ULTIMO", segundo_valor="CUALQUIERA", tercer_valor="YO LLEGUE PRIMERO")
